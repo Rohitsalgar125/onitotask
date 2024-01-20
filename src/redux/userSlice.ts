@@ -2,23 +2,33 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type user = {
   name: string;
-  mobile: number;
-  dob: string;
+  mobile: string;
   sex: string;
-  govId: string;
+  id: string;
   idType: string;
   address: string;
-  pincode: number;
+  pincode: string;
   country: string;
   city: string;
 };
 
+type stepOne = {
+  name: string;
+  mobile: string;
+  sex: string;
+  id: string;
+  idType: string;
+  age: string;
+};
+
 type initialState = {
   userList: user[];
+  stepOne: stepOne[];
 };
 
 const initialState: initialState = {
   userList: [],
+  stepOne: [],
 };
 
 export const userSlice = createSlice({
@@ -28,8 +38,14 @@ export const userSlice = createSlice({
     addSubmitUser: (state, action: PayloadAction<user>) => {
       state.userList.push(action.payload);
     },
+    addStepOne: (state, action: PayloadAction<stepOne>) => {
+      state.stepOne.push(action.payload);
+    },
+    clearStepOne: (state) => {
+      state.stepOne = [];
+    },
   },
 });
 
-export const { addSubmitUser } = userSlice.actions;
+export const { addSubmitUser, addStepOne, clearStepOne } = userSlice.actions;
 export default userSlice.reducer;
