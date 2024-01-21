@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import styles from './AddressDetails.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { addSubmitUser } from '../../redux/userSlice';
+import { addSubmitUser, clearStepOne } from '../../redux/userSlice';
 import { RootState } from '../../redux/store';
 
 
@@ -31,14 +31,16 @@ const AddressDetails: React.FC = () => {
     });
 
     const stepone = useSelector((state: RootState) => state.user.stepOne);
-    const userList  = useSelector((state: RootState) => state.user.userList);
+    const userList = useSelector((state: RootState) => state.user.userList);
 
     const dispatch = useDispatch();
 
 
     const onSubmit: SubmitHandler<FormValues> = (data) => {
-        let payload = { ...data,...stepone[0]};
-        return dispatch(addSubmitUser(payload))
+        let payload = { ...data, ...stepone[0] };
+        dispatch(clearStepOne());
+        dispatch(addSubmitUser(payload))
+        alert('done')
     };
 
     return (

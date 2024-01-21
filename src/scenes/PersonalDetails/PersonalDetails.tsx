@@ -6,6 +6,7 @@ import { Box, Button, MenuItem, Select, TextField, Typography } from '@mui/mater
 import styles from './PersonalDetails.module.css';
 import { addStepOne } from '../../redux/userSlice';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 
 interface FormValues {
@@ -32,10 +33,12 @@ const PersonalDetails: React.FC = () => {
     });
 
     const dispatch = useDispatch();
-
+    const navigate = useNavigate();
 
     const onSubmit: SubmitHandler<FormValues> = (data) => {
-        return dispatch(addStepOne(data))
+         dispatch(addStepOne(data));
+         navigate('/addressdetails')
+
     };
 
     return (
@@ -76,6 +79,7 @@ const PersonalDetails: React.FC = () => {
 
                             <Controller
                                 name="sex"
+                                
                                 control={control}
                                 render={({ field }) => (
                                     <Select
