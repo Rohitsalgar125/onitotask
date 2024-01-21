@@ -9,7 +9,9 @@ type user = {
   address: string;
   pincode: string;
   country: string;
+  state: string;
   city: string;
+  age : string 
 };
 
 type stepOne = {

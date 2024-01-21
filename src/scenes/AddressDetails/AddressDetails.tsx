@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -7,6 +7,7 @@ import styles from './AddressDetails.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { addSubmitUser, clearStepOne } from '../../redux/userSlice';
 import { RootState } from '../../redux/store';
+import { useNavigate } from 'react-router-dom';
 
 
 interface FormValues {
@@ -31,16 +32,33 @@ const AddressDetails: React.FC = () => {
     });
 
     const stepone = useSelector((state: RootState) => state.user.stepOne);
-    const userList = useSelector((state: RootState) => state.user.userList);
-
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+
+        fetch('https://restcountries.com/v3.1/name/india')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
+    }, [])
 
 
     const onSubmit: SubmitHandler<FormValues> = (data) => {
         let payload = { ...data, ...stepone[0] };
         dispatch(clearStepOne());
-        dispatch(addSubmitUser(payload))
-        alert('done')
+        dispatch(addSubmitUser(payload));
+        navigate('/userlist')
     };
 
     return (

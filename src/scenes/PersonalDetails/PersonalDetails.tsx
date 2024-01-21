@@ -123,7 +123,7 @@ const PersonalDetails: React.FC = () => {
                                         className={styles.dropdwon}
 
                                     >
-                                        <MenuItem selected>Select Type</MenuItem>
+                                        <MenuItem selected> ID Type</MenuItem>
                                         <MenuItem value="Aadhar">Aadhar</MenuItem>
                                         <MenuItem value="PAN">PAN</MenuItem>
                                     </Select>
