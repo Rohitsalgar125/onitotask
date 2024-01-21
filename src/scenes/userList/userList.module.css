@@ -4,11 +4,11 @@
   margin-top: 3%;
 }
 
-.headerName{
- text-align: center;
- font-weight: 500 !important;  
- font-size: 22px !important; 
- margin: 2%;
+.headerName {
+  text-align: center;
+  font-weight: 500 !important;
+  font-size: 22px !important;
+  margin: 2%;
 }
 .table {
   border-collapse: collapse;
@@ -30,6 +30,8 @@
   position: relative;
   cursor: grab;
   user-select: none;
+  background-color: #ccc;
+  border: 1px solid black;
 }
 .table th:active {
   cursor: grabbing;

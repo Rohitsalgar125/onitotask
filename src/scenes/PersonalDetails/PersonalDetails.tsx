@@ -45,7 +45,7 @@ const PersonalDetails: React.FC = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
             <Box className={styles.mainDiv}>
                 <Box className={styles.subMainDiv}>
-                    <Typography>Personal Details</Typography>
+                    <Typography sx={{ fontWeight: '700' }}>Personal Details</Typography>
 
                     <Box className={styles.subDiv}>
 
@@ -139,7 +139,7 @@ const PersonalDetails: React.FC = () => {
                             render={({ field }) => (
                                 <TextField
                                     {...field}
-                                    label="Id"
+                                    label="ID"
                                     error={!!errors.id}
                                     helperText={errors.id?.message}
                                 />

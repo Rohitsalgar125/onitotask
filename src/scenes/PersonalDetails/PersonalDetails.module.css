@@ -10,7 +10,7 @@
 .subMainDiv {
   width: 400px;
   height: 420px;
-  border: 1px solid rgb(240, 137, 137);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;

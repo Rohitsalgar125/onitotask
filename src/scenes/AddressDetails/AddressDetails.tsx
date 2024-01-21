@@ -35,7 +35,6 @@ const AddressDetails: React.FC = () => {
     const fetchCountries = async () => {
         let response = await fetch("https://restcountries.com/v3.1/all")
         let responseData = await response.json()
-        console.log(responseData, "response Data")
         return responseData
     }
 
