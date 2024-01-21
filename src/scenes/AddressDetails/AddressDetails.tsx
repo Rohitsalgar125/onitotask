@@ -61,7 +61,7 @@ const AddressDetails: React.FC = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
             <Box className={styles.mainDiv}>
                 <Box className={styles.subMainDiv}>
-                    <Typography>Address Details</Typography>
+                    <Typography sx={{fontWeight:'700'}}>Address Details</Typography>
 
                     <Box className={styles.subDiv}>
 

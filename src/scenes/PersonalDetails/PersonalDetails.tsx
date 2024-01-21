@@ -20,11 +20,24 @@ interface FormValues {
 
 const schema = yup.object().shape({
     name: yup.string().required('Name is required').min(3, 'Minimum 3 characters required'),
-    age: yup.string().required('Age is required'),
+    age: yup.string().required('Age is required').test('ispostive', 'Enter only positvie number', (value: string | any) => {
+        const regex = /^[1-9]*\.?[1-9]+$/
+        if (value.length === 0) {
+            return true
+        }
+        else {
+            return value.match(regex)
+        }
+
+    }),
     sex: yup.string().required('Sex is required'),
     mobile: yup.string().required('Mobile is required'),
     idType: yup.string().required('ID Type is required'),
-    id: yup.string().required('ID is required'),
+    id: yup.string().required('ID is required').when('idType', {
+        is: (value: string | any) => value === "PAN",
+        then: (schema: object | any) => schema.max(10, 'it should be 10 characters').min(10, 'it should be 10 characters'),
+        otherwise: (schema: object | any) => schema.max(12, 'it should be 12 character').min(12, 'it should be 12 characters')
+    }),
 });
 
 const PersonalDetails: React.FC = () => {
