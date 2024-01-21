@@ -67,7 +67,7 @@ const PersonalDetails: React.FC = () => {
                             render={({ field }) => (
                                 <TextField
                                     {...field}
-                                    label="age"
+                                    label="Age"
                                     error={!!errors.age}
                                     helperText={errors.age?.message}
                                 />
@@ -102,7 +102,7 @@ const PersonalDetails: React.FC = () => {
                             render={({ field }) => (
                                 <TextField
                                     {...field}
-                                    label="mobile"
+                                    label="Mobile"
                                     error={!!errors.mobile}
                                     helperText={errors.mobile?.message}
                                 />
@@ -118,7 +118,7 @@ const PersonalDetails: React.FC = () => {
                                 render={({ field }) => (
                                     <Select
                                         {...field}
-                                        label="idType"
+                                        label="Id Type"
                                         error={!!errors.sex}
                                         className={styles.dropdwon}
 
@@ -138,7 +138,7 @@ const PersonalDetails: React.FC = () => {
                             render={({ field }) => (
                                 <TextField
                                     {...field}
-                                    label="id"
+                                    label="Id"
                                     error={!!errors.id}
                                     helperText={errors.id?.message}
                                 />
