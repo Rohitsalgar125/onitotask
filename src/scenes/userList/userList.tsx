@@ -10,6 +10,7 @@ const userList = () => {
             <Typography className={styles.headerName}>--- UserList ---</Typography>
             <table className={styles.table}>
                 <tr>
+                    <th>Sr No</th>
                     <th>Name</th>
                     <th>Age</th>
                     <th>Mobile Number</th>
@@ -25,6 +26,7 @@ const userList = () => {
                     userList.map((e, i) => {
 
                         return <tr key={i}>
+                            <td>{i + 1}</td>
                             <td>{e.name}</td>
                             <td>{e.age}</td>
                             <td>{e.mobile}</td>

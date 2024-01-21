@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { Box, Button,  TextField, Typography, Autocomplete } from '@mui/material';
 import styles from './AddressDetails.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { addSubmitUser, clearStepOne } from '../../redux/userSlice';
@@ -19,9 +19,9 @@ interface FormValues {
 }
 
 const schema = yup.object().shape({
-    address: yup.string().required('Address is required'),
-    state: yup.string().required('State is required'),
-    city: yup.string().required('City is required'),
+    address: yup.string(),
+    state: yup.string(),
+    city: yup.string(),
     country: yup.string().required('Country is required'),
     pincode: yup.string().required('Pincode is required'),
 });
@@ -30,28 +30,25 @@ const AddressDetails: React.FC = () => {
     const { handleSubmit, control, formState: { errors } } = useForm<FormValues>({
         resolver: yupResolver(schema),
     });
+    const [countries, setCountries] = useState([])
+
+    const fetchCountries = async () => {
+        let response = await fetch("https://restcountries.com/v3.1/all")
+        let responseData = await response.json()
+        console.log(responseData, "response Data")
+        return responseData
+    }
+
+    useEffect(() => {
+        (async () => {
+            let countries = await fetchCountries()
+            setCountries(countries)
+        })()
+    }, [])
 
     const stepone = useSelector((state: RootState) => state.user.stepOne);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
-    useEffect(() => {
-
-        fetch('https://restcountries.com/v3.1/name/india')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-
-    }, [])
 
 
     const onSubmit: SubmitHandler<FormValues> = (data) => {
@@ -85,11 +82,13 @@ const AddressDetails: React.FC = () => {
                             name="country"
                             control={control}
                             render={({ field }) => (
-                                <TextField
+                                <Autocomplete
                                     {...field}
-                                    label="Country"
-                                    error={!!errors.country}
-                                    helperText={errors.country?.message}
+                                    disablePortal
+                                    id="combo-box-demo"
+                                    options={countries.map((e) => e.name.common)}
+                                    sx={{ width: 300 }}
+                                    renderInput={(params) => <TextField {...params} label="Country" />}
                                 />
                             )}
                         />

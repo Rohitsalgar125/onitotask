@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { Box, Button, MenuItem, Select, TextField, Typography } from '@mui/material';
+import { Box, Button, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
 import styles from './PersonalDetails.module.css';
 import { addStepOne } from '../../redux/userSlice';
 import { useDispatch } from 'react-redux';
@@ -36,8 +36,8 @@ const PersonalDetails: React.FC = () => {
     const navigate = useNavigate();
 
     const onSubmit: SubmitHandler<FormValues> = (data) => {
-         dispatch(addStepOne(data));
-         navigate('/addressdetails')
+        dispatch(addStepOne(data));
+        navigate('/addressdetails')
 
     };
 
@@ -79,7 +79,7 @@ const PersonalDetails: React.FC = () => {
 
                             <Controller
                                 name="sex"
-                                
+
                                 control={control}
                                 render={({ field }) => (
                                     <Select
@@ -118,12 +118,13 @@ const PersonalDetails: React.FC = () => {
                                 render={({ field }) => (
                                     <Select
                                         {...field}
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
                                         label="Id Type"
-                                        error={!!errors.sex}
-                                        className={styles.dropdwon}
 
+                                        error={!!errors.idType}
+                                        className={styles.dropdwon}
                                     >
-                                        <MenuItem selected> ID Type</MenuItem>
                                         <MenuItem value="Aadhar">Aadhar</MenuItem>
                                         <MenuItem value="PAN">PAN</MenuItem>
                                     </Select>
