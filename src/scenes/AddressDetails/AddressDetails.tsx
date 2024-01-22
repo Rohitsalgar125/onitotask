@@ -23,7 +23,15 @@ const schema = yup.object().shape({
     state: yup.string(),
     city: yup.string(),
     country: yup.string().required('Country is required'),
-    pincode: yup.string().required('Pincode is required'),
+    pincode: yup.string().required('Pincode is required').test('isNumber','Only Numbers are allowed' , (value : string | any)=>{
+        const regex = /^-?\d+(\.\d+)?$/ ;
+        if(value.length === 0){
+            return true
+        }
+        else {
+            return value.match(regex)
+        }
+    }),
 });
 
 const AddressDetails: React.FC = () => {

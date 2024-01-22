@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { Box, Button, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
+import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
 import styles from './PersonalDetails.module.css';
 import { addStepOne } from '../../redux/userSlice';
 import { useDispatch } from 'react-redux';
@@ -21,7 +21,7 @@ interface FormValues {
 const schema = yup.object().shape({
     name: yup.string().required('Name is required').min(3, 'Minimum 3 characters required'),
     age: yup.string().required('Age is required').test('ispostive', 'Enter only positvie number', (value: string | any) => {
-        const regex = /^[1-9]*\.?[1-9]+$/
+        const regex = /^[0-9]*\.?[0-9]+$/
         if (value.length === 0) {
             return true
         }
@@ -89,25 +89,28 @@ const PersonalDetails: React.FC = () => {
                     </Box>
                     <Box className={styles.subDiv}>
                         <Box>
-
-                            <Controller
-                                name="sex"
-
-                                control={control}
-                                render={({ field }) => (
-                                    <Select
-                                        {...field}
-                                        label="Sex"
-                                        error={!!errors.sex}
-                                        className={styles.dropdwon}
-                                    >
-                                        <MenuItem value="male">Male</MenuItem>
-                                        <MenuItem value="female">Female</MenuItem>
-                                        <MenuItem value="other">Other</MenuItem>
-                                    </Select>
-                                )}
-                            />
-                            <Typography className={styles.errorMsg}>{errors.sex?.message}</Typography>
+                            <FormControl>
+                                <InputLabel id="Sex">Sex</InputLabel>
+                                <Controller
+                                    name="sex"
+                                    control={control}
+                                    defaultValue=''
+                                    render={({ field }) => (
+                                        <Select
+                                            {...field}
+                                            label="Sex"
+                                            labelId='Sex'
+                                            error={!!errors.sex}
+                                            className={styles.dropdwon}
+                                        >
+                                            <MenuItem value="male">Male</MenuItem>
+                                            <MenuItem value="female">Female</MenuItem>
+                                            <MenuItem value="other">Other</MenuItem>
+                                        </Select>
+                                    )}
+                                />
+                                <Typography className={styles.errorMsg}>{errors.sex?.message}</Typography>
+                            </FormControl>
                         </Box>
                         <Controller
                             name="mobile"
@@ -125,25 +128,27 @@ const PersonalDetails: React.FC = () => {
                     </Box>
                     <Box className={styles.subDiv}>
                         <Box>
-                            <Controller
-                                name="idType"
-                                control={control}
-                                render={({ field }) => (
-                                    <Select
-                                        {...field}
-                                        labelId="demo-simple-select-label"
-                                        id="demo-simple-select"
-                                        label="Id Type"
-
-                                        error={!!errors.idType}
-                                        className={styles.dropdwon}
-                                    >
-                                        <MenuItem value="Aadhar">Aadhar</MenuItem>
-                                        <MenuItem value="PAN">PAN</MenuItem>
-                                    </Select>
-                                )}
-                            />
-                            <Typography className={styles.errorMsg}>{errors.idType?.message}</Typography>
+                            <FormControl>
+                                <InputLabel id="idType">ID Type</InputLabel>
+                                <Controller
+                                    name="idType"
+                                    control={control}
+                                    defaultValue=''
+                                    render={({ field }) => (
+                                        <Select
+                                            {...field}
+                                            label="idType"
+                                            labelId='idType'
+                                            error={!!errors.idType}
+                                            className={styles.dropdwon}
+                                        >
+                                            <MenuItem value="PAN">PAN</MenuItem>
+                                            <MenuItem value="Aadhar">Aadhar</MenuItem>
+                                        </Select>
+                                    )}
+                                />
+                                <Typography className={styles.errorMsg}>{errors.idType?.message}</Typography>
+                            </FormControl>
                         </Box>
 
                         <Controller
